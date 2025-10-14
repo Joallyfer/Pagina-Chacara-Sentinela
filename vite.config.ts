@@ -66,10 +66,10 @@ export default defineConfig({
     }),
   ],
   base,
-  build: {
-    sourcemap: true,
-    outDir: 'out',
-  },
+    build: {
+      sourcemap: true,
+      outDir: 'dist',  
+    },
   resolve: {
     alias: {
       '@': resolve(__dirname, './src')
