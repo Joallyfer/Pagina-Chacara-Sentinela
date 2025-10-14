@@ -77,17 +77,19 @@ export default function Espaco() {
       <Header />
       
       {/* Hero Section */}
-      <section className="pt-20 pb-16 bg-white">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8 text-center">
-          <h1 className="font-sacramento text-5xl md:text-6xl text-moss-green mb-6">
-            Nossos Espaços
-          </h1>
-          <p className="font-poppins font-light text-lg text-matte-black/70 max-w-3xl mx-auto">
-            Cada canto da Chácara Sentinela foi pensado para criar momentos únicos. 
-            Descubra os espaços que farão parte da sua história de amor.
-          </p>
-        </div>
-      </section>
+{/* Hero Section */}
+        <section className="relative z-10 pt-32 md:pt-36 pb-16 bg-white">
+          <div className="max-w-7xl mx-auto px-6 lg:px-8 text-center">
+            <h1 className="font-sacramento text-5xl md:text-6xl text-moss-green mb-6">
+              Nossos Espaços
+            </h1>
+            <p className="font-poppins font-light text-lg text-matte-black/70 max-w-3xl mx-auto">
+              Cada canto da Chácara Sentinela foi pensado para criar momentos únicos.
+              Descubra os espaços que farão parte da sua história de amor.
+            </p>
+          </div>
+        </section>
+
 
       {/* Spaces Grid */}
       <section className="pb-20">
