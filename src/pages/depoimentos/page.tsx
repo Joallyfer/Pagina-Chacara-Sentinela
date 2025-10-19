@@ -1,9 +1,79 @@
-
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Button from '../../components/base/Button';
 import Header from '../../components/feature/Header';
 import Footer from '../../components/feature/Footer';
+
+function useInView<T extends HTMLElement>(options?: IntersectionObserverInit) {
+  const ref = useRef<T | null>(null);
+  const [inView, setInView] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setInView(true);
+          io.unobserve(entry.target);
+        }
+      },
+      { rootMargin: '0px 0px -10% 0px', threshold: 0.1, ...(options || {}) }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, [options]);
+
+  return { ref, inView };
+}
+
+function PrintCard({
+  src,
+  caption,
+  delay = 0,
+  onClick,
+}: {
+  src: string;
+  caption?: string;
+  delay?: number;
+  onClick?: () => void;
+}) {
+  const { ref, inView } = useInView<HTMLDivElement>();
+  return (
+    <div
+      ref={ref}
+      onClick={onClick}
+      className={[
+        'break-inside-avoid cursor-pointer group',
+        inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6',
+        'transition-all duration-700 ease-out will-change-transform',
+      ].join(' ')}
+      style={{ transitionDelay: `${delay}ms` }}
+    >
+      <div className="relative bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-500 group-hover:scale-[1.02] overflow-hidden">
+        <img
+          src={src}
+          alt={caption || 'Comentário'}
+          className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-105"
+          loading="lazy"
+          decoding="async"
+        />
+        {caption ? (
+          <div className="p-4">
+            <p className="font-poppins font-light text-sm text-moss-green/70 text-center">
+              {caption}
+            </p>
+          </div>
+        ) : null}
+        <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+          <div className="w-8 h-8 bg-white/80 backdrop-blur-sm rounded-full flex items-center justify-center">
+            <i className="ri-eye-line text-moss-green text-sm"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 const Depoimentos = () => {
   const [lightboxImage, setLightboxImage] = useState<string | null>(null);
@@ -37,38 +107,19 @@ const Depoimentos = () => {
     }
   ];
 
-  // Prints de comentários
+  // Prints de comentários (mantidos como você enviou)
   const printsComentarios = [
-    {
-      id: 1,
-      print: 'https://readdy.ai/api/search-image?query=WhatsApp%20message%20screenshot%20with%20wedding%20testimonial%20text%20in%20Portuguese%2C%20mobile%20phone%20interface%2C%20positive%20review%20about%20countryside%20wedding%20venue%2C%20authentic%20social%20media%20comment&width=300&height=400&seq=print1&orientation=portrait',
-      legenda: "Casamento da Juliana & Rafael – Março 2024"
-    },
-    {
-      id: 2,
-      print: 'https://readdy.ai/api/search-image?query=Instagram%20story%20screenshot%20with%20wedding%20venue%20review%2C%20mobile%20interface%2C%20positive%20feedback%20about%20rustic%20wedding%20location%2C%20social%20media%20testimonial%20in%20Portuguese&width=300&height=500&seq=print2&orientation=portrait',
-      legenda: "Ensaio da Camila & Lucas – Julho 2024"
-    },
-    {
-      id: 3,
-      print: 'https://readdy.ai/api/search-image?query=Google%20review%20screenshot%20with%205%20stars%20rating%20for%20wedding%20venue%2C%20positive%20testimonial%20about%20countryside%20location%2C%20authentic%20customer%20feedback%20interface&width=350&height=300&seq=print3&orientation=landscape',
-      legenda: "Avaliação no Google – Beatriz & Thiago"
-    },
-    {
-      id: 4,
-      print: 'https://readdy.ai/api/search-image?query=email%20testimonial%20screenshot%20with%20wedding%20venue%20feedback%2C%20positive%20review%20about%20rustic%20chic%20wedding%20location%2C%20customer%20satisfaction%20message&width=400&height=350&seq=print4&orientation=landscape',
-      legenda: "E-mail de agradecimento – Larissa & Bruno"
-    },
-    {
-      id: 5,
-      print: 'https://readdy.ai/api/search-image?query=Facebook%20post%20screenshot%20with%20wedding%20venue%20recommendation%2C%20social%20media%20testimonial%20about%20countryside%20wedding%20location%2C%20positive%20customer%20review&width=350&height=400&seq=print5&orientation=portrait',
-      legenda: "Post no Facebook – Patricia & Rodrigo"
-    },
-    {
-      id: 6,
-      print: 'https://readdy.ai/api/search-image?query=WhatsApp%20conversation%20screenshot%20with%20wedding%20planning%20messages%2C%20positive%20feedback%20about%20venue%20service%2C%20authentic%20customer%20communication&width=300&height=450&seq=print6&orientation=portrait',
-      legenda: "Conversa no WhatsApp – Amanda & Felipe"
-    }
+    { id: 1,  print: '../img/depoimentos/depoimento1.png'  },
+    { id: 2,  print: '../img/depoimentos/depoimento2.png'  },
+    { id: 3,  print: '../img/depoimentos/depoimento3.png'  },
+    { id: 4,  print: '../img/depoimentos/depoimento4.png'  },
+    { id: 5,  print: '../img/depoimentos/depoimento5.png'  },
+    { id: 6,  print: '../img/depoimentos/depoimento6.png'  },
+    { id: 7,  print: '../img/depoimentos/depoimento7.png'  },
+    { id: 8,  print: '../img/depoimentos/depoimento8.png'  },
+    { id: 9,  print: '../img/depoimentos/depoimento10.png' },
+    { id: 10, print: '../img/depoimentos/depoimento 11.png' },
+    { id: 11, print: '../img/depoimentos/depoimento9.png'  },
   ];
 
   // Vídeos de depoimentos
@@ -127,72 +178,7 @@ const Depoimentos = () => {
         </div>
       </section>
 
-      {/* Depoimentos em Destaque */}
-      <section className="py-20 bg-white">
-        <div className="container mx-auto px-6">
-          <div className="text-center mb-16">
-            <h2 className="font-sacramento text-5xl md:text-6xl text-moss-green mb-6">
-              Palavras que aquecem o coração
-            </h2>
-            <p className="font-poppins font-light text-lg md:text-xl text-moss-green/80 max-w-3xl mx-auto leading-relaxed">
-              Os momentos mais especiais vividos aqui, contados por quem os viveu.
-            </p>
-          </div>
-
-          <div className="space-y-16">
-            {depoimentosDestaque.map((depoimento, index) => (
-              <div 
-                key={depoimento.id}
-                className={`flex flex-col lg:flex-row items-center gap-12 ${
-                  index % 2 === 1 ? 'lg:flex-row-reverse' : ''
-                }`}
-              >
-                <div className="lg:w-1/2">
-                  <div className="relative overflow-hidden rounded-2xl shadow-xl">
-                    <img
-                      src={depoimento.foto}
-                      alt={depoimento.nome}
-                      className="w-full h-96 object-cover"
-                      loading="lazy"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-moss-green/30 to-transparent"></div>
-                  </div>
-                </div>
-                
-                <div className="lg:w-1/2 text-center lg:text-left">
-                  <div className="mb-6">
-                    <div className="flex justify-center lg:justify-start mb-4">
-                      {[...Array(5)].map((_, i) => (
-                        <i key={i} className="ri-star-fill text-soft-gold text-xl"></i>
-                      ))}
-                    </div>
-                    <blockquote className="font-sacramento text-3xl md:text-4xl text-moss-green mb-6 leading-relaxed">
-                      "{depoimento.frase}"
-                    </blockquote>
-                  </div>
-                  
-                  <p className="font-poppins font-light text-lg text-moss-green/80 mb-6 leading-relaxed">
-                    {depoimento.texto}
-                  </p>
-                  
-                  <div className="flex items-center justify-center lg:justify-start">
-                    <div>
-                      <p className="font-poppins font-medium text-moss-green">
-                        {depoimento.nome}
-                      </p>
-                      <p className="font-poppins font-light text-sm text-moss-green/60">
-                        {depoimento.data}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Mural de Comentários */}
+      {/* Mural de Comentários com animação on-scroll */}
       <section className="py-20 bg-light-beige">
         <div className="container mx-auto px-6">
           <div className="text-center mb-16">
@@ -205,78 +191,16 @@ const Depoimentos = () => {
             </p>
           </div>
 
-          {/* Masonry Grid */}
           <div className="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6">
-            {printsComentarios.map((print) => (
-              <div 
+            {printsComentarios.map((print, i) => (
+              <PrintCard
                 key={print.id}
-                className="break-inside-avoid cursor-pointer group"
-                onClick={() => openLightbox(print.print, print.legenda)}
-              >
-                <div className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-500 group-hover:scale-[1.02] overflow-hidden">
-                  <img
-                    src={print.print}
-                    alt={print.legenda}
-                    className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-105"
-                    loading="lazy"
-                  />
-                  <div className="p-4">
-                    <p className="font-poppins font-light text-sm text-moss-green/70 text-center">
-                      {print.legenda}
-                    </p>
-                  </div>
-                  <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <div className="w-8 h-8 bg-white/80 backdrop-blur-sm rounded-full flex items-center justify-center">
-                      <i className="ri-eye-line text-moss-green text-sm"></i>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Depoimentos em Vídeo */}
-      <section className="py-20 bg-white">
-        <div className="container mx-auto px-6">
-          <div className="text-center mb-16">
-            <h2 className="font-sacramento text-5xl md:text-6xl text-moss-green mb-6">
-              Emoções em movimento
-            </h2>
-            <p className="font-poppins font-light text-lg md:text-2xl text-moss-green/80 max-w-3xl mx-auto leading-relaxed">
-              Alguns casais decidiram contar em vídeo como foi viver esse dia especial na Chácara Sentinela.<br />
-              Assista e sinta cada palavra como se estivesse lá.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {videosDepoimentos.map((video) => (
-              <div key={video.id} className="group cursor-pointer">
-                <div className="relative overflow-hidden rounded-xl shadow-lg hover:shadow-xl transition-all duration-500 group-hover:scale-[1.02]">
-                  <img
-                    src={video.thumbnail}
-                    alt={video.titulo}
-                    className="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110"
-                    loading="lazy"
-                  />
-                  <div className="absolute inset-0 bg-moss-green/40 group-hover:bg-moss-green/60 transition-colors duration-300">
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <div className="w-16 h-16 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                        <i className="ri-play-fill text-moss-green text-2xl ml-1"></i>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="absolute bottom-4 left-4 right-4">
-                    <h3 className="font-sacramento text-2xl text-white mb-1">
-                      {video.titulo}
-                    </h3>
-                    <p className="font-poppins font-light text-white/80 text-sm">
-                      {video.descricao}
-                    </p>
-                  </div>
-                </div>
-              </div>
+                src={print.print}
+                // legenda não foi fornecida nos dados — mantemos vazio para não alterar seus paths
+                caption={''}
+                delay={(i % 6) * 80}
+                onClick={() => openLightbox(print.print, '')}
+              />
             ))}
           </div>
         </div>
@@ -343,7 +267,6 @@ const Depoimentos = () => {
               </Button>
             </a>
           </div>
-
         </div>
       </section>
 

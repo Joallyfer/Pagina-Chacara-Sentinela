@@ -10,7 +10,7 @@ export default function Footer() {
           <div className="lg:col-span-2">
             <div className="flex items-center space-x-2 mb-4">
               <div className="w-8 h-8 flex items-center justify-center">
-                <i className="ri-leaf-line text-xl text-soft-gold"></i>
+                <i className="text-xl text-soft-gold"></i>
               </div>
               <span className="font-sacramento text-2xl text-soft-gold">Chácara Sentinela</span>
             </div>
@@ -75,17 +75,37 @@ export default function Footer() {
                   R. Aleixo Nodari, nº - Imbuial, Colombo - PR<br />
                 </a>
               </div>
-              <div className="flex items-center space-x-3">
-                <i className="ri-phone-line text-soft-gold"></i>
-                <a
-                  href="https://wa.me/5541996268287"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="font-poppins font-light text-sm text-light-beige/80 hover:text-light-beige transition-colors duration-300"
-                >
-                  (41) 99626-8287
-                </a>
-              </div>
+              <div className="flex flex-col gap-2">
+                <div className="flex flex-col gap-2">
+                  {/* PARA ENSAIO */}
+                  <div className="flex items-center space-x-3">
+                    <i className="ri-whatsapp-line text-soft-gold text-lg"></i>
+                    <a
+                      href="https://wa.me/5541996504047"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="font-poppins font-light text-sm text-light-beige/80 hover:text-light-beige transition-colors duration-300"
+                    >
+                      Ensaios 41 99650-4047
+                    </a>
+                  </div>
+
+                  {/* EVENTOS */}
+                  <div className="flex items-center space-x-3">
+                    <i className="ri-whatsapp-line text-soft-gold text-lg"></i>
+                    <a
+                      href="https://wa.me/5541995082104"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="font-poppins font-light text-sm text-light-beige/80 hover:text-light-beige transition-colors duration-300"
+                    >
+                      Eventos 41 99508-2104
+                    </a>
+                  </div>
+                </div>
+
+</div>
+
 
               <div className="flex items-center space-x-3">
                 <i className="ri-time-line text-soft-gold"></i>

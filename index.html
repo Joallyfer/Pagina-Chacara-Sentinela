@@ -1,31 +1,95 @@
-
 <!doctype html>
 <html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- 🎯 SEO -->
     <title>Chácara Sentinela - Casamentos e Ensaios em Meio à Natureza</title>
-    <meta name="description" content="Seu grande dia em meio à natureza. Um cenário perfeito para casamentos, ensaios e celebrações únicas na Chácara Sentinela." />
-    <meta name="keywords" content="casamento, ensaio, chácara, natureza, lago, capela, salão de festas, casa da noiva" />
-    
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Sacramento&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
-    
-    <!-- FontAwesome -->
-    <script src="https://kit.fontawesome.com/your-kit-id.js" crossorigin="anonymous"></script>
-    
-    <!-- Remix Icon -->
-    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.0.0/fonts/remixicon.css" rel="stylesheet">
+    <meta
+      name="description"
+      content="Seu grande dia em meio à natureza. Um cenário perfeito para casamentos, ensaios e celebrações únicas na Chácara Sentinela."
+    />
+    <meta
+      name="keywords"
+      content="casamento, ensaio fotográfico, chácara, natureza, lago, capela, salão de festas, casa da noiva, Curitiba, eventos, cerimônia, casamento ao ar livre"
+    />
+    <meta name="author" content="Chácara Sentinela do Imbuial" />
+
+    <!-- 🌿 Favicon -->
+    <link rel="icon" type="image/x-icon" href="../logo/favicon.ico" />
+    <link rel="apple-touch-icon" href="../logo/apple-touch-icon.png" />
+
+    <!-- 💬 Open Graph (Facebook, Instagram, WhatsApp Preview) -->
+    <meta property="og:title" content="Chácara Sentinela do Imbuial" />
+    <meta
+      property="og:description"
+      content="O cenário perfeito para casamentos, ensaios e celebrações em meio à natureza."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://chacarasentinela.com.br" />
+    <meta property="og:image" content="../logo/logo sentinela.png" />
+    <meta property="og:locale" content="pt_BR" />
+
+    <!-- 🐦 Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Chácara Sentinela do Imbuial" />
+    <meta
+      name="twitter:description"
+      content="Seu grande dia em meio à natureza. Casamentos, ensaios e celebrações únicas."
+    />
+    <meta name="twitter:image" content="/og-image.jpg" />
+
+    <!-- 🧠 Schema.org -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name": "Chácara Sentinela do Imbuial",
+        "image": [
+        "https://chacarasentinela.com.br/og-image.jpg",
+        "https://chacarasentinela.com.br/img/salaodefestas.jpg",
+        "https://chacarasentinela.com.br/img/cerimonialago.jpeg"
+        ],
+        "description": "O cenário perfeito para casamentos, ensaios e celebrações em meio à natureza.",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Curitiba",
+          "addressRegion": "PR",
+          "addressCountry": "BR"
+        },
+        "telephone": "+55 41 99626-8287",
+        "url": "https://chacarasentinela.com.br"
+      }
+    </script>
+
+    <!-- 🖋️ Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Sacramento&family=Poppins:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- 🎨 Ícones -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@4.0.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+
+    <!-- ❌ Removido FontAwesome padrão (pode pesar o site)
+         Caso queira usar, substitua o seu kit ID abaixo -->
+    <!-- <script src="https://kit.fontawesome.com/your-kit-id.js" crossorigin="anonymous"></script> -->
   </head>
+
   <body>
     <div id="root"></div>
+
+    <!-- ⚡ Entrada principal -->
     <script type="module" src="/src/main.tsx"></script>
-    
-    <!-- Readdy Agent Widget -->
-    <script 
+
+    <!-- 🤖 Readdy Agent Widget -->
+    <script
       src="https://readdy.ai/api/public/assistant/widget?projectId=3b3943a2-14a3-4469-9d51-251915282305"
       mode="hybrid"
       voice-show-transcript="true"
