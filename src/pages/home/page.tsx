@@ -161,7 +161,7 @@ export default function Home() {
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0">
           <video autoPlay muted loop playsInline preload="auto" className="w-full h-full object-cover">
-            <source src="../videos/Sentinela 4.webm" type="video/mp4" />
+            <source src="../videos/Sentinela 2.webm" type="video/mp4" />
             Seu navegador não suporta vídeos em HTML5.
           </video>
           <div className="absolute inset-0 bg-soft-gold/20"></div>
